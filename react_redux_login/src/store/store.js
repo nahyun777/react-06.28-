@@ -4,6 +4,7 @@
 // slices 폴더
 
 import { configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "./slices/AccountSlice.js"; //export default 로 내보낸건 {}없이
 
 // 슬라이스의 내용들을  store에 담는다
 // App 컴포넌트를 Provider로 감싸서 범위를 설정 <Provider store={store}><App/></Provider>

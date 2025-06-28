@@ -10,11 +10,15 @@ export const login = createAsyncThunk('', async / login() => {
     // fetch를 통해서 서버에 정볼르 요청
     const res = await fetch('http://logcalhost:3000/api/login', {
         method: 'POST', //요청방식 POST
-        headers: ,// JSON형태로 전단
-        body: ,
-    })
+        headers: { 'Content-Type': 'application/json' },// JSON형태로 전단
+        body: JSON.stringify(data),// JSON형태로 전단
+    });
+    const result = await res.json();
+    console.log('서버응답 : ', result);
 
-})
+    return result.user;
+
+});
 
 
 // 계정 정보를 처리할 리덕스 툴킷
@@ -45,6 +49,24 @@ createSlice({
             state.user = action.payload;  //값을 변경
         }
     },
+    extraReducers: (builder)()=>{
+    // 비동기로 실행되는 함수
+    // pending(대기), falled(성공), succeeded(거절)
+    builder.addCase(
+        login.pending, (state, action) => {
+            state.status = "loading"
+        }
+    )
+        .addCase(
+            login.rejected,
+        )
+        .addCase(
+            login.fulfilled(state, action)=> {
+            state.status = "success"
+                state.user = actiom.
+            }
+        )
+}
 });
 
 export const { logout, restore } = slice.action; //
